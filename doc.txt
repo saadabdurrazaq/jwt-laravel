@@ -1,0 +1,58 @@
+CHECK PHP VERSION IN LOCALHOST:
+cd C:/Xampp/php
+php -v
+
+CHECK LARAVEL VERSION:
+php artisan --version
+
+INSTALL THE LATEST LARAVEL: 
+composer create-project --prefer-dist laravel/laravel project_name
+
+INSTALL SPECIFIC LARAVEL VERSION: 
+composer create-project laravel/laravel="7.*" project_name
+
+REST API EXAMPLE WITH JWT (Tutorial from: https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api/)
+composer create-project laravel/laravel laravel-jwt-auth --prefer-dist
+php artisan migrate
+composer require tymon/jwt-auth
+config/app.php
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+secret key stored in .env file.
+app/Models/User.php
+config/auth.php
+php artisan make:controller AuthController
+app/Http/Controllers/AuthController.php
+routes/api.php
+php artisan serve
+
+For testing: 
+URL: http://127.0.0.1:8000/api/auth/register
+Method: POST
+input data location: Body > form-data
+input data key: name, email, password, password_confirmation
+input data value: <input the value of data above>
+
+URL: http://127.0.0.1:8000/api/auth/login
+Method: POST
+input data location: Body > form-data
+input data key: email, password
+input data value: <input the value of data above>
+
+URL: http://127.0.0.1:8000/api/auth/user-profile
+Method: GET
+input data location: Authorization
+input data type: Bearer Token
+input data token value: <token generated when login>
+
+URL: http://127.0.0.1:8000/api/auth/refresh
+Method: POST
+input data location: Authorization
+input data type: Bearer Token
+input data token value: <token generated when login>
+
+URL: http://127.0.0.1:8000/api/auth/logout
+Method: POST
+input data location: Authorization
+input data type: Bearer Token
+input data token value: <token generated when login>
